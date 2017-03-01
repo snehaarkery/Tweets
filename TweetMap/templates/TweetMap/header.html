@@ -1,0 +1,105 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{##}
+{#<head>#}
+{#	<title>Harrison Kinsley</title>#}
+{#	<meta charset="utf-8" />#}
+{#	{% load staticfiles %}#}
+{#	<link rel="stylesheet" href="{% static 'TweetMap/css/bootstrap.min.css' %}" type = "text/css"/>#}
+{#	<meta name="viewport" content = "width=device-width, initial-scale=1.0"> 		#}
+{#	#}
+{#	<style type="text/css">#}
+{#		html,#}
+{#		body {#}
+{#		  height:100%#}
+{#		}#}
+{#	</style>#}
+{#</head>#}
+{##}
+{#<body class="body" style="background-color:#f6f6f6">#}
+{#	<div class="container-fluid" style="min-height:95%; ">#}
+{#		<div class="row">#}
+{#			  <div class="col-sm-2">#}
+{#				  <br>#}
+{#				  <center>#}
+{#					<img src="{% static 'personal/img/profile.jpg' %}" class="responsive-img" style='max-height:100px;' alt="face">#}
+{#				  </center>#}
+{#			  </div>#}
+{#			  <div class="col-sm-10">#}
+{#				  <br>#}
+{#				  <center>#}
+{#				  <h3>Programming, Teaching, Entrepreneurship</h3>#}
+{#				  </center>#}
+{#			  </div>#}
+{#		</div><hr>#}
+{##}
+{#		<div class="row">#}
+{#		  <div class="col-sm-2">#}
+{#		  <br>#}
+{##}
+{#		  <br>#}
+{#		   <!-- Great, til you resize. -->#}
+{#			<!--<div class="well bs-sidebar affix" id="sidebar" style="background-color:#fff">-->#}
+{#			<div class="well bs-sidebar" id="sidebar" style="background-color:#fff">#}
+{#			  <ul class="nav nav-pills nav-stacked">#}
+{#				<li><a href='/'>Home</a></li>#}
+{#				<li><a href='/blog/'>Blog</a></li>#}
+{#				<li><a href='/contact/'>Contact</a></li>#}
+{#			  </ul>#}
+{#			</div> <!--well bs-sidebar affix-->#}
+{#		  </div> <!--col-sm-2-->#}
+{#		  <div class="col-sm-10">#}
+{#		  #}
+{#			<div class='container-fluid'>#}
+{#			<br><br>#}
+{#			   {% block content %}#}
+{#			   {% endblock %}	#}
+{#			</div>#}
+{#		  </div>#}
+{#		</div> #}
+{#	</div>#}
+{#	<footer>#}
+{#		<div class="container-fluid" style='margin-left:15px'>#}
+{#			<p><a href="#" target="blank">Contact</a> | <a href="#" target="blank">LinkedIn</a> | <a href="#" target="blank">Twitter</a> | <a href="#" target="blank">Google+</a></p>#}
+{#		</div>#}
+{#	</footer>	#}
+{#	#}
+{#</body>#}
+{##}
+{#</html>#}
+
+
+
+{% load leaflet_tags %}
+<html>
+  <head>
+    {% leaflet_js %}
+    {% leaflet_css %}
+    <style>
+      .leaflet-container { height: 100%; }
+    </style>
+    <script type="text/javascript">
+      var dataurl = '{% url "data" %}';
+      window.addEventListener("map:init", function (event) {
+        var map = event.detail.map;
+        // Download GeoJSON data with Ajax
+        fetch(dataurl)
+          .then(function(resp) {
+            return resp.json();
+          })
+          .then(function(data) {
+            L.geoJson(data, {
+              onEachFeature: function onEachFeature(feature, layer) {
+                var props = feature.properties;
+                var content =`<img width="300" src="${props.picture_url}"/><h3>"${props.title}"</h3><p>${props.description}</p>`;
+                layer.bindPopup(content);
+            }}).addTo(map);
+          });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Mushrooms Spots</h1>
+    {% leaflet_map "main" %}
+  </body>
+</html>
