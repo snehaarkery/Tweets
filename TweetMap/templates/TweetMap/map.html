@@ -10,25 +10,31 @@
   </head>
   <body>
     <h3>My Google Maps Demo</h3>
-    <select name="Trending Topics">
-      {% for trend in trendings %}
-          <option value="{{ trend }}">{{ trend }}</option>
-      {% endfor %}
-    </select>
+
+
     <div id="map"></div>
-    <script>
+    <script type="text/javascript">
       function initMap() {
-        var uluru = {lat: -25.363, lng: 131.044};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
+          var bounds = new google.maps.LatLngBounds();
+          var map = new google.maps.Map(document.getElementById('map'));
+
+          function Marker(lat, longi, title) {
+              var pos = new google.maps.LatLng(lat, longi);
+              var marker = new google.maps.Marker({
+                  position: pos,
+                  map: map,
+
+              });
+              bounds.extend(position);
+          }
+
+      map.fitBounds(bounds);
       }
     </script>
+    {% for tweet in tweets %}
+      Marker({{ tweet.lat }}, {{ tweet.longi }}, "{{ tweet.title }}");
+    {% endfor %}
+    google.maps.event.addDomListener(window, 'load', initialize);
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBMoblZSN1LRrImUEIM7YHpYePTy-oCpk&callback=initMap">
     </script>

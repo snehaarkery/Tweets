@@ -38,6 +38,7 @@ ALLOWED_HOSTS = ['127.0.0.1','localhost', 'Tweet-env.5gdetti6qt.us-west-2.elasti
 # Application definition
 
 INSTALLED_APPS = [
+    'django_pdb',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -57,6 +58,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_pdb.middleware.PdbMiddleware',
 ]
 
 

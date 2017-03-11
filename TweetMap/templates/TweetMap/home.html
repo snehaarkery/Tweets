@@ -1,8 +1,98 @@
-{% extends "TweetMap/header.html" %}
+<html lang="en">
+	<head>
 
-{% block content %}
-	{% for c in content %}
-		<p>{{c}}</p>
-	{% endfor %}
+		<title>Tweets on Map</title>
+		<style>
+			#map{
+				height: 600px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Tweets on Map</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <select name="Trending Topics" id="yr">
+                {% block content %}
+                    {% for trend in trendings %}
+                        <option value="{{ trend }}">{{ trend }}</option>
+                    {% endfor %}
+                {% endblock %}
+            </select>
+            <button onclick="eval()">Submit</button>
+        </form>
+        <div id="map"></div>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBMoblZSN1LRrImUEIM7YHpYePTy-oCpk&callback=initMap"></script>
 
-{% endblock %}	
+		<script>
+			function initMap() {
+			  var map = new google.maps.Map(document.getElementById('map'));
+			  var bounds = new google.maps.LatLngBounds();
+			  map.fitBounds(bounds);
+		  }
+		  google.maps.event.addDomListener(window, 'load', initMap);
+		</script>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"> </script>
+		<script type="text/javascript">
+
+			function Marker(lat, longi, title) {
+				  var pos = new google.maps.LatLng(lat, longi);
+				  var marker = new google.maps.Marker({
+					  position: pos,
+					  map: map,
+					  title: title
+				  });
+				  bounds.extend(pos);
+			}
+
+			function deleteMarkers(){
+				clearMarkers();
+				markers = [];
+			}
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                        // Only send the token to relative URLs i.e. locally.
+                        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                    }
+                }
+            });
+
+			function eval() {
+				var val = document.getElementById('yr').value;
+				alert(val);
+
+				$.ajax({
+					url : "/filter/",
+					method : "POST",
+					dataType : "json",
+                    input: val,
+
+                    "beforeSend": function(xhr, settings) {
+                                console.log("Before Send");
+                                $.ajaxSettings.beforeSend(xhr, settings);
+                            },
+
+					success: function (res) {
+						counter = 0;
+						alert(res);
+						tweetmsgs = res.tweets;
+						bounds = new google.maps.latLngBounds();
+						for(var i=0; i<tweetmsgs.length;i++){
+							var result = tweetmsgs[i];
+							alert(result);
+							Marker(result.lat, result.longi, result.title);
+						}
+						map.fitBounds(bounds);
+
+					},
+					error: function (textStatus, errort) {
+						console.log("Text Status"+textStatus+"Error is "+errort);
+
+					}
+					}
+				)
+			}
+		</script>
+	</body>
+</html>
