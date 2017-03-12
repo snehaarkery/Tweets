@@ -8,9 +8,10 @@
 			}
 		</style>
 	</head>
+    <link rel="stylesheet" type="text/css" href="../../../static/css/bootstrap.css">
 	<body>
 		<h1>Tweets on Map</h1>
-        <form method="POST">
+        <form id="form1" method="POST">
             {% csrf_token %}
             <select name="Trending Topics" id="yr">
                 {% block content %}
@@ -19,21 +20,20 @@
                     {% endfor %}
                 {% endblock %}
             </select>
-            <button onclick="eval()">Submit</button>
+            <input type="button" value="Submit" onclick="eval()"></input>
         </form>
         <div id="map"></div>
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBMoblZSN1LRrImUEIM7YHpYePTy-oCpk&callback=initMap"></script>
-
-		<script>
-			function initMap() {
-			  var map = new google.maps.Map(document.getElementById('map'));
-			  var bounds = new google.maps.LatLngBounds();
-			  map.fitBounds(bounds);
-		  }
-		  google.maps.event.addDomListener(window, 'load', initMap);
-		</script>
-		<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"> </script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBMoblZSN1LRrImUEIM7YHpYePTy-oCpk"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"> </script>
 		<script type="text/javascript">
+            var map;
+            var bounds;
+			function initMap() {
+			  map = new google.maps.Map(document.getElementById('map'));
+			  bounds = new google.maps.LatLngBounds();
+			  map.fitBounds(bounds);
+		    }
+		    google.maps.event.addDomListener(window, 'load', initMap);
 
 			function Marker(lat, longi, title) {
 				  var pos = new google.maps.LatLng(lat, longi);
@@ -45,15 +45,37 @@
 				  bounds.extend(pos);
 			}
 
+			function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie != '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = jQuery.trim(cookies[i]);
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                            alert('mice');
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                alert(cookieValue);
+                return cookieValue;
+            }
+
+
 			function deleteMarkers(){
-				clearMarkers();
+				setMapOnAll(null);
 				markers = [];
 			}
+
             $.ajaxSetup({
                 beforeSend: function(xhr, settings) {
                     if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
                         // Only send the token to relative URLs i.e. locally.
+                        alert('dog');
                         xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                        alert('buffalooo');
                     }
                 }
             });
@@ -61,37 +83,35 @@
 			function eval() {
 				var val = document.getElementById('yr').value;
 				alert(val);
-
 				$.ajax({
 					url : "/filter/",
 					method : "POST",
 					dataType : "json",
-                    input: val,
-
+                    data:{input:val},
                     "beforeSend": function(xhr, settings) {
-                                console.log("Before Send");
-                                $.ajaxSettings.beforeSend(xhr, settings);
-                            },
+                                    console.log("Before Send");
+                                    $.ajaxSettings.beforeSend(xhr, settings);
+                    },
+					success: function(result) {
+					    counter = 0;
+						console.log(counter);
+						tweetmsgs = result.tweets;
+						console.log(tweetmsgs);
+                        bounds = new google.maps.LatLngBounds();
 
-					success: function (res) {
-						counter = 0;
-						alert(res);
-						tweetmsgs = res.tweets;
-						bounds = new google.maps.latLngBounds();
 						for(var i=0; i<tweetmsgs.length;i++){
-							var result = tweetmsgs[i];
-							alert(result);
-							Marker(result.lat, result.longi, result.title);
+							var res = tweetmsgs[i];
+							Marker(res.lat, res.longi, res.title);
 						}
 						map.fitBounds(bounds);
 
 					},
 					error: function (textStatus, errort) {
-						console.log("Text Status"+textStatus+"Error is "+errort);
+						console.log(textStatus, errort);
 
 					}
-					}
-				)
+                });
+
 			}
 		</script>
 	</body>

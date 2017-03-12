@@ -30,9 +30,9 @@ GOOGLE_MAPS_API_KEY = 'AIzaSyDBMoblZSN1LRrImUEIM7YHpYePTy-oCpk'
 GEOPOSITION_GOOGLE_MAPS_API_KEY = 'AIzaSyA5g3Pa7kaLGMbaCCx4AH3EluCu2QPwTIg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost', 'Tweet-env.5gdetti6qt.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
