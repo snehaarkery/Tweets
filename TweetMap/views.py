@@ -2,13 +2,10 @@ from django.shortcuts import render
 import tweepy
 from tweepy import OAuthHandler, StreamListener, Stream
 import time
-import os
 import json
-from decimal import Decimal
 from elasticsearch import Elasticsearch
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_protect
-import datetime
 import geocoder
 
 es = Elasticsearch()

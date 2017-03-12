@@ -3,17 +3,12 @@ click==6.7
 decorator==4.0.11
 Django==1.9.2
 django-geojson==2.9.1
-django-geoposition==0.3.0
-django-leaflet==0.20.0
-django-location-field==2.0.2
-django-pdb==0.5.1
 elasticsearch==5.2.0
 geocoder==1.20.1
 jsonfield==1.0.3
 oauthlib==2.0.1
 olefile==0.44
 packaging==16.8
-pdb==0.1
 Pillow==4.0.0
 pyparsing==2.1.10
 python-gnupg==0.4.0
