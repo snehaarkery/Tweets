@@ -15,7 +15,6 @@ olefile==0.44
 packaging==16.8
 pdb==0.1
 Pillow==4.0.0
-pkg-resources==0.0.0
 pyparsing==2.1.10
 python-gnupg==0.4.0
 PyYAML==3.12
