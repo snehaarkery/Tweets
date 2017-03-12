@@ -7,7 +7,6 @@ geocoder==1.20.1
 jsonfield==1.0.3
 oauthlib==2.0.1
 packaging==16.8
-Pillow==4.0.0
 pyparsing==2.1.10
 PyYAML==3.12
 requests==2.13.0
