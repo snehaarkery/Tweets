@@ -30,7 +30,7 @@ GOOGLE_MAPS_API_KEY = 'AIzaSyDBMoblZSN1LRrImUEIM7YHpYePTy-oCpk'
 GEOPOSITION_GOOGLE_MAPS_API_KEY = 'AIzaSyA5g3Pa7kaLGMbaCCx4AH3EluCu2QPwTIg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['twittermapenv.zduympb9vh.us-west-2.elasticbeanstalk.com']
 
@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'TweetMap',
-    'blog',
 ]
 
 MIDDLEWARE_CLASSES = [
