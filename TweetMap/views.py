@@ -10,28 +10,27 @@ import geocoder
 import requests
 from aws_requests_auth.aws_auth import AWSRequestsAuth
 
-es_host = "search-twittermaps-vruzd4lsovcog62ty5uilg7flm.us-west-2.es.amazonaws.com"
-auth = AWSRequestsAuth(aws_access_key="AKIAIUHMGTRSV4R3PC4Q",
-                       aws_secret_access_key="rlR43yGSLGAX1Q96QHGBSpFp357Ady4U0me6oYLD",
+es_host = "<Your-key>"
+
+auth = AWSRequestsAuth(aws_access_key="Your-key",
+                       aws_secret_access_key="Your-Key",
                        aws_host=es_host,
                        aws_region="us-west-2",
                        aws_service="es")
 
-es = Elasticsearch(host=es_host,
-                          port=80,
-                          connection_class=RequestsHttpConnection,
-                          http_auth=auth)
+es = Elasticsearch(host = es_host,
+                    port = 443,
+                    use_ssl =True,
+                    verify_certs = True,
+                    connection_class=RequestsHttpConnection)
 
-# es = Elasticsearch()
-
-consumer_key = '4lu0KBdbkhRhK0zg4HEk9k3Wp'
-consumer_secret = 'gowCnsCRUXidVmathcHVnml4c2B2QEuDu6XM5PXs8Tp1HEg7bz'
-access_token = '4621122272-vpdd9KBuj0TPUETmBPcLIEfDK7puogaD1T9G6lq'
-access_secret = '035CnvnwCdFoXNpMrpfslKGEZOfG7o3hurugofmKoTfMn'
+consumer_key = 'Your-Key'
+consumer_secret = 'You-Key'
+access_token = 'Your-Key'
+access_secret = 'Your-Key'
 
 auth = OAuthHandler(consumer_key, consumer_secret)
 authAPI = auth.set_access_token(access_token, access_secret)
-
 
 class listener(StreamListener):
     def __init__(self, time_limit=60):

@@ -20,14 +20,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'iopoody(b$n#gba9m(k_60ey%^ganz0#)5_b(692@jbx*cr^0+'
-
+# SECRET_KEY = 'iopoody(b$n#gba9m(k_60ey%^ganz0#)5_b(692@jbx*cr^0+'
+SECRET_KEY = 'You-key'
 # Add google maps key to activate the Google Maps API
 # Generate a key on https://code.google.com/apis/console
-GOOGLE_MAPS_API_KEY = 'AIzaSyDBMoblZSN1LRrImUEIM7YHpYePTy-oCpk'
+GOOGLE_MAPS_API_KEY = 'Your-Key'
 
 # inbuild django package to track geolocations
-GEOPOSITION_GOOGLE_MAPS_API_KEY = 'AIzaSyA5g3Pa7kaLGMbaCCx4AH3EluCu2QPwTIg'
+GEOPOSITION_GOOGLE_MAPS_API_KEY = 'YourKey'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
