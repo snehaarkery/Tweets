@@ -7,16 +7,8 @@ from elasticsearch import Elasticsearch, RequestsHttpConnection
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_protect
 import geocoder
-import requests
-from aws_requests_auth.aws_auth import AWSRequestsAuth
 
-es_host = "<Your-key>"
-
-auth = AWSRequestsAuth(aws_access_key="Your-key",
-                       aws_secret_access_key="Your-Key",
-                       aws_host=es_host,
-                       aws_region="us-west-2",
-                       aws_service="es")
+es_host = '<Add-your-key>'
 
 es = Elasticsearch(host = es_host,
                     port = 443,
@@ -24,10 +16,10 @@ es = Elasticsearch(host = es_host,
                     verify_certs = True,
                     connection_class=RequestsHttpConnection)
 
-consumer_key = 'Your-Key'
-consumer_secret = 'You-Key'
-access_token = 'Your-Key'
-access_secret = 'Your-Key'
+consumer_key = '<Add-your-key>'
+consumer_secret = '<Add-your-key>'
+access_token = '<Add-your-key>'
+access_secret = '<Add-your-key>'
 
 auth = OAuthHandler(consumer_key, consumer_secret)
 authAPI = auth.set_access_token(access_token, access_secret)
@@ -95,18 +87,18 @@ class listener(StreamListener):
 
 @csrf_protect
 def filter(request):
-    # print "yes"
+    print "yes"
     if request.method == "POST":
         try:
-            # print request.method
+            print request.method
             if 'input' in request.POST:
                 query = str(request.POST.get('input', ''))
                 # print query
                 try:
-                    l = listener(time_limit=60)
+                    l = listener(time_limit=30)
                     twitter_stream = Stream(auth, l)
                     twitter_stream.filter(track=[query])
-                    tweets = es.search(index='tweetindex', body={"from": 0, "size": 1000, "query": {"match": {"title":query}}})
+                    tweets = es.search(index='tweetindex',doc_type="Collections", body={"from": 0, "size": 1000, "query": {"match": {"title":query}}})
                     # print tweets.keys()
                     latlonginfo = []
                     for tweet in tweets['hits']['hits']:
@@ -116,8 +108,8 @@ def filter(request):
                         info['title'] = tweet['_source']['title']
                         latlonginfo.append(info)
                         print (info)
-                    # print latlonginfo
-                    return JsonResponse({'tweets' : latlonginfo})
+                    print latlonginfo
+                    return JsonResponse({'tweets': latlonginfo})
                 except Exception as e:
                     print e
                     return HttpResponse('Error')
@@ -130,10 +122,11 @@ def init(request):
     trends = api.trends_place(1)
     trending_topic_names = []
     for vol in (val for item, val in trends[0].iteritems() if item == 'trends'):
-        trending_topic_indx = sorted(range(len(vol)), key=lambda k: vol[k]['tweet_volume'])[::-20]
-        trending_topic_names = [vol[i]['name'] for i in trending_topic_indx]
+        trending_topic_indx = sorted(range(len(vol)), key=lambda k: vol[k]['tweet_volume'])[::-10]
+        for i, _ in enumerate(trending_topic_indx):
+            if vol[i]['tweet_volume'] is not None:
+                trending_topic_names.append(vol[i]['name'])
+        # trending_topic_names = [vol[i]['name'] for i in trending_topic_indx]
+
     print(trending_topic_names)
     return render(request, 'TweetMap/home.html', {'trendings': trending_topic_names})
-
-if __name__ == '__main__':
-    filter('Trump')

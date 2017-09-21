@@ -47,158 +47,438 @@
         text-decoration: none;
         cursor: pointer;
     }
+
+    .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+}
+
+    #fade {
+        display: none;
+        position:absolute;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        background-color: #ababab;
+        z-index: 1001;
+        -moz-opacity: 0.8;
+        opacity: .70;
+        filter: alpha(opacity=80);https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_loader
+    }
+
+    #modal_image {
+        display: none;
+        position: absolute;
+        top: 45%;
+        left: 45%;
+        width: 64px;
+        height: 64px;
+        padding:30px 15px 0px;
+        border: 3px solid #ababab;
+        box-shadow:1px 1px 10px #ababab;
+        border-radius:20px;
+        background-color: white;
+        z-index: 1002;
+        text-align:center;
+        overflow: auto;
+    }
+
+    #results {
+        font-size:1.25em;
+        color:red
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .center {
+        z-index: 1000;
+        margin: 300px auto;
+        padding: 10px;
+        width: 130px;
+        background-color: White;
+        border-radius: 10px;
+        filter: alpha(opacity=100);
+        opacity: 1;
+        -moz-opacity: 1;
+    }
+
+    .loadingimage {
+        position: fixed;
+        z-index: 999;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-color: Black;
+        filter: alpha(opacity=60);
+        opacity: 0.6;
+        -moz-opacity: 0.8;
+    }
+
+    input[type=text] {
+        width: 130px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        font-size: 12px;
+        background-color: white;
+        background-image: url('https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ95NtS2g3Uk9bGrZZCzoHYUcwEDplSVDzNpdG7PPzO8SrB_PJt');
+        background-size: 30px, 30px;
+        background-position: left, center;
+        background-repeat: no-repeat;
+        padding: 12px 20px 12px 40px;
+        -webkit-transition: width 0.4s ease-in-out;
+        transition: width 0.4s ease-in-out;
+    }
+
+    input[type=text]:focus {
+        width: 100%;
+    }
+
+    #loader {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          z-index: 1;
+          width: 150px;
+          height: 150px;
+          margin: -75px 0 0 -75px;
+          border: 16px solid #f3f3f3;
+          border-radius: 50%;
+          border-top: 16px solid #3498db;
+          width: 120px;
+          height: 120px;
+          -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+        }
+
+    @-webkit-keyframes spin {
+          0% { -webkit-transform: rotate(0deg); }
+          100% { -webkit-transform: rotate(360deg); }
+        }
+
+    @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+
+        /* Add animation to "page content" */
+    .animate-bottom {
+          position: relative;
+          -webkit-animation-name: animatebottom;
+          -webkit-animation-duration: 1s;
+          animation-name: animatebottom;
+          animation-duration: 1s
+        }
+
+    @-webkit-keyframes animatebottom {
+          from { bottom:-100px; opacity:0 }
+          to { bottom:0px; opacity:1 }
+        }
+
+    @keyframes animatebottom {
+          from{ bottom:-100px; opacity:0 }
+          to{ bottom:0; opacity:1 }
+        }
+
+    #myDiv {
+          display: none;
+          text-align: center;
+        }
+
+    .wrapper-dropdown-3 {
+        /* Size and position */
+        position: relative;
+        width: 200px;
+        margin: 0 auto;
+        padding: 10px;
+
+        /* Styles */
+        background: #fff;
+        border-radius: 7px;
+        border: 1px solid rgba(0,0,0,0.15);
+        box-shadow: 0 1px 1px rgba(50,50,50,0.1);
+        cursor: pointer;
+        outline: none;
+
+        /* Font settings */
+        font-weight: bold;
+        color: #8AA8BD;
+    }
+
+    .wrapper-dropdown-3:after {
+        content: "";
+        width: 0;
+        height: 0;
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        margin-top: -3px;
+        border-width: 6px 6px 0 6px;
+        border-style: solid;
+        border-color: #8aa8bd transparent;
+    }
+
+    .wrapper-dropdown-3 .dropdown {
+        /* Size & position */
+        position: absolute;
+        top: 140%;
+        left: 0;
+        right: 0;
+
+        /* Styles */
+        background: white;
+        border-radius: inherit;
+        border: 1px solid rgba(0, 0, 0, 0.17);
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        font-weight: normal;
+        transition: all 0.5s ease-in;
+        list-style: none;
+
+        /* Hiding */
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .wrapper-dropdown-3 .dropdown:after {
+        content: "";
+        width: 0;
+        height: 0;
+        position: absolute;
+        bottom: 100%;
+        right: 15px;
+        border-width: 0 6px 6px 6px;
+        border-style: solid;
+        border-color: #fff transparent;
+    }
+
+    .wrapper-dropdown-3 .dropdown:before {
+        content: "";
+        width: 0;
+        height: 0;
+        position: absolute;
+        bottom: 100%;
+        right: 13px;
+        border-width: 0 8px 8px 8px;
+        border-style: solid;
+        border-color: rgba(0,0,0,0.1) transparent;
+    }
+
+    .wrapper-dropdown-3 .dropdown li a {
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        color: #8aa8bd;
+        border-bottom: 1px solid #e6e8ea;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,1);
+        transition: all 0.3s ease-out;
+    }
+
+    .wrapper-dropdown-3 .dropdown li i {
+        float: right;
+        color: inherit;
+    }
+
+    .wrapper-dropdown-3 .dropdown li:first-of-type a {
+        border-radius: 7px 7px 0 0;
+    }
+
+    .wrapper-dropdown-3 .dropdown li:last-of-type a {
+        border-radius: 0 0 7px 7px;
+        border: none;
+    }
+
+    /* Hover state */
+
+    .wrapper-dropdown-3 .dropdown li:hover a {
+        background: #f3f8f8;
+    }
+
+    .wrapper-dropdown-3.active .dropdown {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
     </style>
 	<body>
+        <div id="maindiv">
+            <h1>Trending Tweets <img title="Click for more info" src="http://www.bracebridge.ca/en/town-services/resources/Images/Button-Images/mayor-and-council-image1.jpg" id="imgkey" width="25" height="25">
+            </h1>
+            <p>Select a keyword to check for trend location</p>
+{#            <form id="textid" name="Form" method="POST">#}
+{#              {% csrf_token %}#}
+{#              <input id="inputid" type="text" name="search" placeholder="Search.." onsubmit="eval()">#}
+{#            </form>#}
+            <form id="form1" method="POST">
+                {% csrf_token %}
+                <select name="Trending Topics" id="yr">
+                    {% block content %}
+                        {% for trend in trendings %}
+                            <option value="{{ trend }}">{{ trend }}</option>
+                        {% endfor %}
+                    {% endblock %}
+                </select>
+                <input type="button" value="Submit" onclick="eval()"></input>
+            </form>
+{#            <div id="results"><!-- Results are displayed here --></div>#}
+{#            <div id="fade"></div>#}
+{#            <div id="modal_image">#}
+{#                <img id="loader" src="images/loading.gif" />#}
+{#            </div>#}
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
 
-		<h1>Trending Tweets <img title="Click for more info" src="http://www.bracebridge.ca/en/town-services/resources/Images/Button-Images/mayor-and-council-image1.jpg" id="imgkey" width="25" height="25">
-        </h1>
-        <p>Select a keyword to check for trend location</p>
-        <form id="form1" method="POST">
-            {% csrf_token %}
-            <select name="Trending Topics" id="yr">
-                {% block content %}
-                    {% for trend in trendings %}
-                        <option value="{{ trend }}">{{ trend }}</option>
-                    {% endfor %}
-                {% endblock %}
-            </select>
-            <input type="button" value="Submit" onclick="eval()"></input>
-        </form>
+              <!-- Modal content -->
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                  <p></p>
+                  <p>This page maps the last geolocalized tweets delivered by the twitter stream API.</p>
+                  <p>Each second, about fifty new tweets are added. We are limited by twitter stream but we could do much higher.</p>
+                  <p>Done by Shaivi Kochar, New York University</p>
+              </div>
 
-        <div id="map"></div>
+            </div>
+            <div id="map"></div>
+{#            <div id='loadingimage' style='display:none'>#}
+{#                <div class="center">#}
+{#                    <img src="http://adrian-design.com/images/loading.gif"/>#}
+{#                </div>#}
+{#            </div>#}
+            <script src="https://maps.googleapis.com/maps/api/js?key=<Add-your-key>"></script>
+            <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"> </script>
+            <script type="text/javascript">
+                var map;
+                var bounds;
+                function initMap() {
+                    var uluru = {lat: 38.68551, lng: -96.503906};
+                  map = new google.maps.Map(document.getElementById('map'), {
+                      zoom: 4,
+                      center: uluru
+                    });
+                }
 
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBMoblZSN1LRrImUEIM7YHpYePTy-oCpk"></script>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"> </script>
-		<script type="text/javascript">
-            var map;
-            var bounds;
-			function initMap() {
-			    var uluru = {lat: 38.68551, lng: -96.503906};
-			  map = new google.maps.Map(document.getElementById('map'), {
-                  zoom: 4,
-                  center: uluru
-                });
-		    }
-		    google.maps.event.addDomListener(window, 'load', initMap);
+                google.maps.event.addDomListener(window, 'load', initMap);
 
-			function Marker(lat, longi, title) {
-				  var pos = new google.maps.LatLng(lat, longi);
-				  var marker = new google.maps.Marker({
-					  position: pos,
-					  map: map,
-					  title: title
-				  });
-				  bounds.extend(pos);
-			}
+                function Marker(lat, longi, title) {
+                      var pos = new google.maps.LatLng(lat, longi);
+                      var marker = new google.maps.Marker({
+                          position: pos,
+                          map: map,
+                          title: title
+                      });
+                      bounds.extend(pos);
+                }
 
-			function getCookie(name) {
-                var cookieValue = null;
-                if (document.cookie && document.cookie != '') {
-                    var cookies = document.cookie.split(';');
-                    for (var i = 0; i < cookies.length; i++) {
-                        var cookie = jQuery.trim(cookies[i]);
-                        // Does this cookie string begin with the name we want?
-                        if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                            break;
+                function getCookie(name) {
+                    var cookieValue = null;
+                    if (document.cookie && document.cookie != '') {
+                        var cookies = document.cookie.split(';');
+                        for (var i = 0; i < cookies.length; i++) {
+                            var cookie = jQuery.trim(cookies[i]);
+                            // Does this cookie string begin with the name we want?
+                            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                break;
+                            }
                         }
                     }
+                    alert(cookieValue);
+                    return cookieValue;
                 }
-                alert(cookieValue);
-                return cookieValue;
-            }
 
 
-			function deleteMarkers(){
-				setMapOnAll(null);
-				markers = [];
-			}
+                function deleteMarkers(){
+                    setMapOnAll(null);
+                    markers = [];
+                }
 
-            $.ajaxSetup({
-                beforeSend: function(xhr, settings) {
-                    if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
-                        // Only send the token to relative URLs i.e. locally.
-                        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                function openModal() {
+                        document.getElementById('modal').style.display = 'block';
+                        document.getElementById('fade').style.display = 'block';
+                }
+
+                function closeModal() {
+                    document.getElementById('modal').style.display = 'none';
+                    document.getElementById('fade').style.display = 'none';
+                }
+
+                $.ajaxSetup({
+                    beforeSend: function(xhr, settings) {
+                        if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                            // Only send the token to relative URLs i.e. locally.
+                            xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                        }
                     }
-                }
-            });
-
-			function eval() {
-				var val = document.getElementById('yr').value;
-				alert(val);
-				$.ajax({
-					url : "/filter/",
-					method : "POST",
-					dataType : "json",
-                    data:{input:val},
-                    "beforeSend": function(xhr, settings) {
-                                    console.log("Before Send");
-                                    $.ajaxSettings.beforeSend(xhr, settings);
-                    },
-					success: function(result) {
-					    counter = 0;
-						console.log(counter);
-						tweetmsgs = result.tweets;
-						console.log(tweetmsgs);
-                        bounds = new google.maps.LatLngBounds();
-
-						for(var i=0; i<tweetmsgs.length;i++){
-							var res = tweetmsgs[i];
-							Marker(res.lat, res.longi, res.title);
-						}
-						map.fitBounds(bounds);
-
-					},
-					error: function (textStatus, errort) {
-						console.log(textStatus, errort);
-
-					}
                 });
 
-			}
-		</script>
-	</body>
+                function eval() {
+                    var val = document.getElementById('yr').value;
+                    var myval = document.getElementById()
+                    alert(val);
+                    $.ajax({
+                        url : "/filter/",
+                        method : "POST",
+                        dataType : "json",
+                        data:{input:val},
+                        "beforeSend": function(xhr, settings) {
+                                        console.log("Before Send");
+                                        $.ajaxSettings.beforeSend(xhr, settings);
+                        },
+                        success: function(result) {
+                            counter = 0;
+                            tweetmsgs = result.tweets;
+                            console.log(tweetmsgs);
+                            bounds = new google.maps.LatLngBounds();
+                            for(var i=0; i<tweetmsgs.length;i++){
+                                var res = tweetmsgs[i];
+                                Marker(res.lat, res.longi, res.title);
+                            }
+                            map.fitBounds(bounds);
 
+                        },
+                        error: function (textStatus, errort) {
+                            console.log(textStatus, errort);
 
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
+                        }
+                    });
+                }
+            </script>
+            <script>
+                // Get the modal
+                var modal = document.getElementById('myModal');
 
-      <!-- Modal content -->
-      <div class="modal-content">
-        <span class="close">&times;</span>
-          <p></p>
-          <p>This page maps the last geolocalized tweets delivered by the twitter stream API.</p>
-          <p>Each second, about fifty new tweets are added. We are limited by twitter stream but we could do much higher.</p>
-          <p>Done by Shaivi Kochar and Sneha Arkrey, NYU Tandon School of Engineering.</p>
-      </div>
+                // Get the button that opens the modal
+                var btn = document.getElementById("imgkey");
 
-    </div>
+                // Get the <span> element that closes the modal
+                var span = document.getElementsByClassName("close")[0];
 
-    <script>
-    // Get the modal
-    var modal = document.getElementById('myModal');
+                // When the user clicks the button, open the modal
+                btn.onclick = function() {
+                    modal.style.display = "block";
+                }
 
-    // Get the button that opens the modal
-    var btn = document.getElementById("imgkey");
+                // When the user clicks on <span> (x), close the modal
+                span.onclick = function() {
+                    modal.style.display = "none";
+                }
 
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks the button, open the modal
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-    </script>
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+            </script>
+        </div>
+    </body>
 </html>

@@ -17,9 +17,9 @@ lib
 lib64
 
 #py
-/TweetMap/**/*.pyc
-/TweetMap/**/*.pyo
-/TweetMap/**/*.json
+./TweetMap/**/*.pyc
+./TweetMap/**/*.pyo
+./TweetMap/**/*.json
 
 #Pycharm
 ./.idea
